@@ -1,2 +1,5 @@
 venv/
 .env
+notebook_speech_to_text.ipynb
+notebooklm.ipynb
+ragnotebook.ipynb
