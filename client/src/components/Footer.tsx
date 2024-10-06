@@ -1,8 +1,12 @@
+"use client"
 import Container from "./Container";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+    const pathname = usePathname()
+    if (pathname !== '/services/chatbot')
     return (
-        <footer className=" mt-12 mb-8 absolute bottom-0 border-black bg-white border-t-2 w-full">
+        <footer className=" flex flex-row border-black bg-white border-t-2 w-full">
             <Container>
                 <div className=" flex flex-row justify-between px-8">
                     <div className="flex flex-col gap-">

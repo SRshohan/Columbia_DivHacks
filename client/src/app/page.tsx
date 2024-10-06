@@ -5,7 +5,7 @@ import HackatomImage1 from '../images/hackaton_1.png'
 import HackatomImage2 from '../images/hackaton_2.png'
 import HackatomImage3 from '../images/hackaton_3.jpg'
 import HackatomImage4 from '../images/hackaton_4.jpg'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -19,16 +19,20 @@ export default function Home() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % dummyData.length)
-  }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % dummyData.length);
+    }, 2000);
 
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + dummyData.length) % dummyData.length);
-  }
+    return () => clearInterval(interval);
+  }, [dummyData.length]);
+
+  const handleDotClick = (index: number) => {
+    setCurrentIndex(index);
+  };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
+    <main className="flex flex-col items-center justify-center bg-blue-300 min-h-screen p-4">
       <div className="flex flex-col items-center justify-center w-full h-full">
         {currentIndex + 1 !== dummyData.length ? (
                   <CardForHomePage image={dummyData[currentIndex].image} question={dummyData[currentIndex].question} />
@@ -40,14 +44,13 @@ export default function Home() {
           </Button>
         )}
         <div className="flex flex-row justify-between mt-4">
-          <Button onClick={handlePrev} className="bg-gray-200 p-2 text-black rounded-full mr-4">
-            Prev
-          </Button>
-          {currentIndex + 1 !== dummyData.length && (
-            <Button onClick={handleNext} className="bg-gray-200 p-2 text-black rounded-full ml-4">
-              Next
-            </Button>
-          )}
+          {dummyData.map((_, index) => (
+            <div
+              key={index}
+              className={`w-3 h-3 mx-1 rounded-full cursor-pointer ${currentIndex === index ? 'bg-black' : 'bg-gray-300'}`}
+              onClick={() => handleDotClick(index)}
+            />
+          ))}
         </div>
       </div>
     </main>
