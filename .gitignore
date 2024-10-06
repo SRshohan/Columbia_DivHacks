@@ -1,2 +1,4 @@
 venv/
 notebooklm.ipynb
+.env
+client/.env
