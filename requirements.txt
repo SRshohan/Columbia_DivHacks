@@ -3,3 +3,5 @@ python-dotenv
 langchain
 Flask
 Flask-Restful
+gymnasium
+stable_baselines3

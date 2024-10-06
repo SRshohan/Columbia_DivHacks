@@ -3,6 +3,7 @@ from langchain.prompts import PromptTemplate
 from langchain_openai import OpenAI
 import os
 from dotenv import load_dotenv
+import numpy as np
 
 load_dotenv()
 
@@ -64,7 +65,53 @@ def generate_response(user_input, detected_emotion):
     return response
 
 
+from RL_model import EmotionExerciseEnv, interact_and_train, load_and_evaluate_model
+from setiment_analysis import detect_sentiment
+from stable_baselines3 import PPO
+from stable_baselines3.common.env_checker import check_env
+
+# Reward calculation based on sentiment change
+def calculate_reward(initial_sentiment, new_sentiment):
+    if initial_sentiment == "NEGATIVE" and new_sentiment in ["POSITIVE", "NEUTRAL"]:
+        return 1.0
+    elif initial_sentiment == "NEUTRAL" and new_sentiment == "POSITIVE":
+        return 1.0
+    elif initial_sentiment == "POSITIVE" and new_sentiment == "NEGATIVE":
+        return -1.0
+    return 0.0
     
+
+# class Chatbot(Resource):
+#     def post(self):
+#         parser = reqparse.RequestParser()
+#         parser.add_argument('user_input', type=str, required=True, help="Input cannot be blank!")
+#         args = parser.parse_args()
+
+#         user_input = args["user_input"]
+#         sentiment = detect_sentiment(user_input)
+    
+#         # RL agent action
+#         env = EmotionExerciseEnv()
+#         model = PPO("MlpPolicy", env, verbose=1)
+#         # # Sentiment analysis
+#         # sentiment = detect_sentiment(user_input)
+
+#         # Chatbot response
+#         chatbot_response = generate_response(user_input, sentiment)
+
+#         model.learn(total_timesteps=100)  # Update the model with the new experience
+
+#         # Save the model
+#         model.save("ppo_emotion_exercise")
+
+#         # Load the model
+#         model = PPO.load("ppo_emotion_exercise")
+
+#         # Evaluate the model
+#         load_and_evaluate_model("ppo_emotion_exercise", env, num_steps=1000)
+
+#         return {'response': chatbot_response}
+
 class Chatbot(Resource):
     def post(self):
         parser = reqparse.RequestParser()
@@ -72,8 +119,24 @@ class Chatbot(Resource):
         args = parser.parse_args()
 
         user_input = args["user_input"]
-        detected_emotion = detect_emotion(user_input)
-        response = generate_response(user_input, detected_emotion)
+        sentiment = detect_sentiment(user_input)
 
-        return {'response': response}
+        # RL agent action
+        env = EmotionExerciseEnv()
+        model = PPO("MlpPolicy", env, verbose=1)
 
+        # Chatbot response
+        chatbot_response = generate_response(user_input, sentiment)
+
+        model.learn(total_timesteps=100)  # Update the model with the new experience
+
+        # Save the model
+        model.save("ppo_emotion_exercise")
+
+        # Load the model
+        model = PPO.load("ppo_emotion_exercise")
+
+        # Evaluate the model
+        load_and_evaluate_model("ppo_emotion_exercise", env, num_steps=1000)
+
+        return {'response': chatbot_response}
