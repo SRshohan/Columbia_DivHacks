@@ -3,6 +3,7 @@ from langchain.prompts import PromptTemplate
 from langchain_openai import OpenAI
 import os
 from dotenv import load_dotenv
+from voice import generate_response, generate_audio, listen
 
 load_dotenv()
 
@@ -62,7 +63,7 @@ def generate_response(user_input, detected_emotion):
             response = "I'm here to listen. Can you tell me more about how you're feeling? What’s been on your mind lately?"
 
     return response
-
+C
 
     
 class Chatbot(Resource):
@@ -74,6 +75,8 @@ class Chatbot(Resource):
         user_input = args["user_input"]
         detected_emotion = detect_emotion(user_input)
         response = generate_response(user_input, detected_emotion)
+        audio = generate_audio(response)
+        lis = listen()
 
         return {'response': response}
 
