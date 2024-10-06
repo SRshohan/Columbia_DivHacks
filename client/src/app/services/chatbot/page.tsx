@@ -24,7 +24,7 @@ const Chatbot = () => {
     const [input, setInput] = useState<string>("");
     const [file, setFile] = useState<File | null>(null);
     const [preQuestSeen, SetPreQuestSeen] = useState(true);
-    const [retrievedData, setRetrievedData] = useState<any>(null);
+    const [retrievedData, setRetrievedData] = useState(null);
     const [ipfsUrl, setIpfsUrl] = useState<string | null>(null);
     // Mic
     const [isToggled, setIsToggled] = useState(false);
@@ -36,7 +36,7 @@ const Chatbot = () => {
         try {
             // Store the user input to Verbwire
             if (input && file) {
-                await storeDataToVerbwire(input, file);
+                await storeDataToVerbwire({input, file});
             }
 
             // Send the user input to the AI model
@@ -71,6 +71,7 @@ const Chatbot = () => {
             try {
                 const data = await fetchDataFromIPFS(ipfsUrl);
                 setRetrievedData(data);
+                setIpfsUrl(data);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }

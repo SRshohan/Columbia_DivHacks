@@ -1,11 +1,11 @@
 import facebookImage from '@/images/Facebook_iOS_2019_icon_padded.png';
 import convertStaticImageToBase64 from '@/convertImageToBase64';
 
-const storeDataToVerbwire = async (data: any) => {
+const storeDataToVerbwire = async (input: string) => {
   const form = new FormData();
   form.append('name', 'UserInput');
   form.append('description', 'User input data');
-  form.append('data', JSON.stringify([{ message: data }]));
+  form.append('data', JSON.stringify([{ message: input }]));
 
   // Convert the image to base64
   const base64Image = await convertStaticImageToBase64(facebookImage);

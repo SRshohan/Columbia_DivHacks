@@ -1,4 +1,4 @@
-import { Root, Track } from "@/types/Types";
+import { Track } from "@/types/Types";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Image1 from "@/images/hackaton_1.png";

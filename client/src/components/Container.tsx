@@ -1,10 +1,6 @@
 import { cn } from '@/lib/utils'
 
-interface ContainerProps extends React.ComponentProps<"div"> {
-
-}
-
-const Container = ({ children, className, ...props }: ContainerProps) => {
+const Container = ({ children, className, ...props }: React.ComponentProps<"div">) => {
     return (
         <div {...props} className={cn('', className)}>
             { children }

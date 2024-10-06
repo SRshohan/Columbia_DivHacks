@@ -55,7 +55,7 @@ const AI_Assistant = () => {
                     </button>
                 </div>
                 <div className="mb-4 gap-2">
-                    <p className="text-gray-700">Let's find something that can calm you down 😌😌😌...</p>
+                    <p className="text-gray-700">Let&apos;s find something that can calm you down...</p>
                     <p className="text-gray-700">Which of the following musical genres do you prefer?</p>
                 </div>
                 <Select

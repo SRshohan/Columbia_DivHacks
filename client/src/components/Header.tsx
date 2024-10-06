@@ -8,7 +8,6 @@ import { Activity } from "lucide-react";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 const Header = () => {
-  const [activeLink, setActiveLink] = useState(null);
   const [scrollActive, setScrollActive] = useState(false);
 
   useEffect(() => {
@@ -40,10 +39,7 @@ const Header = () => {
             //     setActiveLink("about");
             //   }}
               className={
-                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" +
-                (activeLink === "home"
-                  ? " text-orange-500 animation-active "
-                  : " text-black-500 hover:text-orange-500 a")
+                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative"
               }
             >
               <Link href="/">
@@ -60,10 +56,7 @@ const Header = () => {
             //     setActiveLink("feature");
             //   }}
               className={
-                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" +
-                (activeLink === "feature"
-                  ? " text-orange-500 animation-active "
-                  : " text-black-500 hover:text-orange-500 ")
+                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative"
               }
             >
               <Link href="/services">
@@ -80,10 +73,7 @@ const Header = () => {
             //     setActiveLink("pricing");
             //   }}
               className={
-                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" +
-                (activeLink === "chat_companion"
-                  ? " text-orange-500 animation-active "
-                  : " text-black-500 hover:text-orange-500 ")
+                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" 
               }
             >
               <Link href="/services/chatbot">
@@ -100,10 +90,7 @@ const Header = () => {
             //     setActiveLink("testimoni");
             //   }}
               className={
-                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" +
-                (activeLink === "about"
-                  ? " text-orange-500 animation-active "
-                  : " text-black-500 hover:text-orange-500 ")
+                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" 
               }
             >
               <Link href="/about">
@@ -143,10 +130,7 @@ const Header = () => {
             //     setActiveLink("about");
             //   }}
               className={
-                "mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 transition-all " +
-                (activeLink === "about"
-                  ? "  border-orange-500 text-orange-500"
-                  : " border-transparent")
+                "mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 transition-all " 
               }
             >
               <svg
@@ -175,10 +159,7 @@ const Header = () => {
             //     setActiveLink("feature");
             //   }}
               className={
-                "mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 transition-all " +
-                (activeLink === "feature"
-                  ? "  border-orange-500 text-orange-500"
-                  : " border-transparent ")
+                "mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 transition-all "
               }
             >
               <svg
@@ -207,10 +188,7 @@ const Header = () => {
             //     setActiveLink("pricing");
             //   }}
               className={
-                "mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 transition-all " +
-                (activeLink === "pricing"
-                  ? "  border-orange-500 text-orange-500"
-                  : " border-transparent ")
+                "mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 transition-all "
               }
             >
               <svg
@@ -239,10 +217,7 @@ const Header = () => {
             //     setActiveLink("testimoni");
             //   }}
               className={
-                "mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 transition-all " +
-                (activeLink === "testimoni"
-                  ? "  border-orange-500 text-orange-500"
-                  : " border-transparent ")
+                "mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 transition-all "
               }
             >
               <svg
